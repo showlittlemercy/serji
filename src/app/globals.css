@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   SERJI Design Tokens — Tailwind v4 @theme
+   Palette: Dark Red / Deep Red / Olive Gray / Beige
+   ============================================================ */
 
 @theme inline {
+  /* Brand palette */
+  --color-primary: #6d0808;
+  --color-deep: #2d0000;
+  --color-muted: #757d6f;
+  --color-light: #eeead7;
+
+  /* Semantic aliases used across components */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-fg: var(--muted-fg);
+
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-syne);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------- Light mode (default) ---------- */
+:root {
+  --background: #eeead7;
+  --foreground: #2d0000;
+  --surface: #f5f2e6;
+  --surface-elevated: #ffffff;
+  --border: color-mix(in srgb, #757d6f 35%, transparent);
+  --accent: #6d0808;
+  --accent-foreground: #eeead7;
+  --muted-fg: #757d6f;
+}
+
+/* ---------- Dark mode ---------- */
+.dark {
+  --background: #2d0000;
+  --foreground: #eeead7;
+  --surface: #3a0a0a;
+  --surface-elevated: #4a1010;
+  --border: color-mix(in srgb, #757d6f 40%, transparent);
+  --accent: #c44a4a;
+  --accent-foreground: #eeead7;
+  --muted-fg: #9aa193;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Subtle grain overlay for depth (very light, non-distracting) */
+.serji-grain::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Selection */
+::selection {
+  background: color-mix(in srgb, #6d0808 40%, transparent);
+  color: #eeead7;
 }

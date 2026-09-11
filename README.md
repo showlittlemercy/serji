@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SERJI
 
-## Getting Started
+Centralized hub for AI & developer tools — built with **Next.js (App Router)**, **Tailwind CSS**, **Framer Motion**, **Lucide React**, and **Supabase** (free tier).
 
-First, run the development server:
+## Quick start
 
 ```bash
+cd serji
+cp .env.example .env.local   # add your Supabase URL + anon key
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Color palette
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Token    | Hex       | Role                          |
+|----------|-----------|-------------------------------|
+| Primary  | `#6D0808` | Accent / CTAs                 |
+| Deep     | `#2D0000` | Dark-mode background          |
+| Muted    | `#757D6F` | Secondary text / olive gray   |
+| Light    | `#EEEAD7` | Light-mode background         |
 
-## Learn More
+Tokens live in `src/app/globals.css` (`@theme`) and are documented in `tailwind.config.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+## Features (current)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Light / dark mode via `next-themes`
+- Sticky navbar with project links + theme toggle
+- Monthly background animations (12 Framer Motion scenes)
+- Landing hero + interactive project cards
+- Stub routes for the three upcoming tools
+- Supabase client scaffold in `src/lib/supabase.ts`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project routes
 
-## Deploy on Vercel
+| Tool                         | Path                         |
+|------------------------------|------------------------------|
+| AI Resume Analyzer           | `/projects/resume-analyzer`  |
+| Code Snippet & Error Solver  | `/projects/code-solver`      |
+| AI Expense Tracker           | `/projects/expense-tracker`  |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Supabase SQL
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Copy/paste files from `/sql` into the Supabase SQL Editor **in order**:
+
+1. `sql/001_initial_setup.sql` — profiles, tools registry, RLS
+
+> **Rule:** after every database change, add a new numbered SQL file (e.g. `002_…sql`). Never edit prior migration files in place for applied changes.
+
+## Folder map
+
+```
+serji/
+├── sql/                          # Paste-into-Supabase migrations
+├── src/
+│   ├── app/                      # App Router pages
+│   ├── components/
+│   │   ├── background/           # MonthlyBackground (12 months)
+│   │   ├── home/                 # Hero + project cards
+│   │   ├── layout/               # Navbar
+│   │   ├── projects/             # Project stub UI
+│   │   └── providers/            # ThemeProvider + ThemeToggle
+│   └── lib/                      # supabase.ts, projects.ts
+├── .env.example
+└── tailwind.config.ts            # Palette reference
+```
