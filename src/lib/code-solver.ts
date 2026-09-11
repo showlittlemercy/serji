@@ -48,7 +48,7 @@ function getModel() {
     );
   }
 
-  const modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash";
+  const modelName = process.env.GEMINI_MODEL || "gemini-3.6-flash";
   const genAI = new GoogleGenerativeAI(apiKey);
   return genAI.getGenerativeModel({
     model: modelName,

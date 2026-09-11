@@ -37,7 +37,7 @@ export async function analyzeResumeWithGemini(
     );
   }
 
-  const modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash";
+  const modelName = process.env.GEMINI_MODEL || "gemini-3.6-flash";
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
     model: modelName,
