@@ -34,7 +34,7 @@ function getModel() {
       "GEMINI_API_KEY is not configured. Add it to your .env or .env.local file."
     );
   }
-  const modelName = process.env.GEMINI_MODEL || "gemini-2.0-flash";
+  const modelName = process.env.GEMINI_MODEL || "gemini-1.5-flash";
   const genAI = new GoogleGenerativeAI(apiKey);
   return genAI.getGenerativeModel({
     model: modelName,

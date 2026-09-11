@@ -59,7 +59,8 @@ export async function POST(request: Request) {
       }
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
     const resumeText = await extractTextFromPdf(buffer);
 
     if (!resumeText || resumeText.length < 40) {

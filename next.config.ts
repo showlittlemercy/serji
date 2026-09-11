@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Keep pdfjs-dist out of the Turbopack/webpack bundle for API routes
-  serverExternalPackages: ["pdfjs-dist"],
+  // Keep pdf-parse external so Next does not bundle its Node internals
+  serverExternalPackages: ["pdf-parse"],
 };
 
 export default nextConfig;
