@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Code2 } from "lucide-react";
-import { ProjectStub } from "@/components/projects/ProjectStub";
+import { CodeSolver } from "@/components/code-solver/CodeSolver";
 
 export const metadata: Metadata = {
   title: "Code Snippet & Error Solver",
+  description:
+    "Paste buggy code or describe a snippet — get AI fixes, explanations, and clean examples powered by Gemini.",
 };
 
 export default function CodeSolverPage() {
-  return (
-    <ProjectStub
-      title="Code Snippet & Error Solver"
-      description="Paste broken code or errors and receive clear fixes with explanations. Full tool UI coming next."
-      icon={Code2}
-    />
-  );
+  return <CodeSolver />;
 }

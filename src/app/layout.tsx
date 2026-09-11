@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Syne } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { AnimationProvider } from "@/context/AnimationContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { MonthlyBackground } from "@/components/background/MonthlyBackground";
 import "./globals.css";
@@ -37,9 +38,11 @@ export default function RootLayout({
         className={`${manrope.variable} ${syne.variable} serji-grain relative min-h-full flex flex-col font-sans antialiased`}
       >
         <ThemeProvider>
-          <MonthlyBackground />
-          <Navbar />
-          <main className="relative z-10 flex flex-1 flex-col">{children}</main>
+          <AnimationProvider>
+            <MonthlyBackground />
+            <Navbar />
+            <main className="relative z-10 flex flex-1 flex-col">{children}</main>
+          </AnimationProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -7,10 +7,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PROJECTS } from "@/lib/projects";
 import { ThemeToggle } from "@/components/providers/ThemeToggle";
+import { AnimationSelector } from "@/components/layout/AnimationSelector";
 
 /**
  * Sticky modern Navbar for SERJI.
- * Left: brand logo · Center/Right: project links · Far right: theme toggle
+ * Left: brand · Center: project links · Right: animation selector + theme toggle
  */
 export function Navbar() {
   const pathname = usePathname();
@@ -18,7 +19,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/75 backdrop-blur-md">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:gap-4 sm:px-6">
         {/* Brand */}
         <Link
           href="/"
@@ -49,6 +50,7 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <AnimationSelector />
           <ThemeToggle />
 
           {/* Mobile menu button */}

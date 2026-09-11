@@ -1,0 +1,32 @@
+---
+description: Strict Supabase SQL migration rules for SERJI — never edit old migrations
+alwaysApply: true
+---
+
+# Supabase migrations (SERJI)
+
+## Before any database work
+
+1. Scan `supabase/migrations/*.sql` and all Supabase query usage (`src/lib/**`, API routes).
+2. Infer the current schema from those migrations — do not invent tables/columns that are not defined.
+
+## Never mutate applied migrations
+
+- **Do not** edit, alter, overwrite, rename, or delete existing SQL migration files.
+- Legacy copies under `sql/` are historical only — do not edit them either.
+
+## Always add a new numbered file
+
+If a feature needs new tables, columns, indexes, policies, functions, triggers, or relations:
+
+1. Create the next file: `supabase/migrations/00N_short_snake_name.sql`
+2. Examples: `003_add_user_roles.sql`, `004_resume_analyses.sql`
+3. Paste-only friendly SQL for the Supabase SQL Editor
+4. Point docs / UI error messages at the new path
+
+## Source of truth
+
+- Canonical path: `supabase/migrations/`
+- Current baseline:
+  - `001_initial_schema.sql` → `profiles`, `tools`
+  - `002_expense_tracker.sql` → `expenses`

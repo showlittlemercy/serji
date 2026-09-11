@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Keep pdfjs-dist out of the Turbopack/webpack bundle for API routes
+  serverExternalPackages: ["pdfjs-dist"],
 };
 
 export default nextConfig;

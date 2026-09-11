@@ -43,17 +43,19 @@ Tokens live in `src/app/globals.css` (`@theme`) and are documented in `tailwind.
 
 ## Supabase SQL
 
-Copy/paste files from `/sql` into the Supabase SQL Editor **in order**:
+Copy/paste files from `supabase/migrations/` into the Supabase SQL Editor **in order**:
 
-1. `sql/001_initial_setup.sql` — profiles, tools registry, RLS
+1. `supabase/migrations/001_initial_schema.sql` — profiles, tools registry, RLS
+2. `supabase/migrations/002_expense_tracker.sql` — expenses table + RLS
 
-> **Rule:** after every database change, add a new numbered SQL file (e.g. `002_…sql`). Never edit prior migration files in place for applied changes.
+> **Rule:** never edit prior migration files. After every database change, add a new numbered file (`003_…sql`, `004_…sql`, …). Legacy copies under `/sql` are historical only.
 
 ## Folder map
 
 ```
 serji/
-├── sql/                          # Paste-into-Supabase migrations
+├── supabase/migrations/          # Canonical paste-into-Supabase migrations
+├── sql/                          # Legacy copies only (do not edit / do not extend)
 ├── src/
 │   ├── app/                      # App Router pages
 │   ├── components/

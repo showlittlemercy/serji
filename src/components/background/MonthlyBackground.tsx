@@ -1,14 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useMemo, type ReactNode } from "react";
+import { useAnimation } from "@/context/AnimationContext";
 
 /**
  * MonthlyBackground
  * ------------------
- * Detects the current calendar month and renders a subtle, aesthetic
- * particle/shape animation behind the landing page. Pure Framer Motion + CSS —
- * no heavy 3D libraries.
+ * Renders a subtle month-themed particle/shape animation.
+ * Honors AnimationContext: "auto" → current calendar month, or a forced month.
  */
 
 type Particle = {
@@ -452,18 +452,25 @@ const MONTH_SCENES = [
 
 /**
  * Globally reusable monthly background.
- * Uses `new Date().getMonth()` (0–11) to pick the scene.
+ * Switches scenes smoothly when the user changes the Navbar animation selector.
  */
 export function MonthlyBackground() {
-  const [month, setMonth] = useState<number | null>(null);
+  const { activeMonth } = useAnimation();
+  const Scene = MONTH_SCENES[activeMonth] ?? January;
 
-  useEffect(() => {
-    // Client-only to keep SSR deterministic
-    setMonth(new Date().getMonth());
-  }, []);
-
-  if (month === null) return null;
-
-  const Scene = MONTH_SCENES[month] ?? January;
-  return <Scene />;
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={activeMonth}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.45, ease: "easeInOut" }}
+        className="pointer-events-none fixed inset-0 z-0"
+        aria-hidden
+      >
+        <Scene />
+      </motion.div>
+    </AnimatePresence>
+  );
 }

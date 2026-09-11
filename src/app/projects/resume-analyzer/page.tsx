@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { FileSearch } from "lucide-react";
-import { ProjectStub } from "@/components/projects/ProjectStub";
+import { ResumeAnalyzer } from "@/components/resume-analyzer/ResumeAnalyzer";
 
 export const metadata: Metadata = {
   title: "AI Resume Analyzer",
+  description:
+    "Upload your PDF resume for an ATS score, strengths, and actionable improvements powered by Google Gemini.",
 };
 
 export default function ResumeAnalyzerPage() {
-  return (
-    <ProjectStub
-      title="AI Resume Analyzer"
-      description="Upload a resume and get AI-powered feedback on structure, keywords, and impact. Full tool UI coming next."
-      icon={FileSearch}
-    />
-  );
+  return <ResumeAnalyzer />;
 }
